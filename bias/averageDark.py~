@@ -1,0 +1,19 @@
+from astropy.io import fits
+import numpy as np
+import matplotlib.pyplot as plt
+import glob
+
+f = glob.glob('*.fit')
+
+data = np.array([])
+
+for i in range(len(f)):
+    hdul = fits.open(f[i])
+    hdul.info()
+    data = np.append(data,hdul[0].data)
+    hdul.close()
+    print(i)
+
+dark = np.average(data, axis=0)
+print(dark)
+    
