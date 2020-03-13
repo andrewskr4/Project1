@@ -49,6 +49,11 @@ def plot(i):
     #rect = patches.Rectangle((xmin, ymin), 200, 100, linewidth=1, edgecolor='r',facecolor='none')
     data = np.load(f[i])
 
+    #subtract background from data
+    background = data[400,1000]
+    print(background)
+    data = data - background
+
     #for each image, get the position of our star.
     #The range for each loop corresponds to a rectangle
     #that encapsulates the entire path of the
@@ -100,7 +105,7 @@ def plot(i):
     #where the alorithm thinks our star or the control star is depending
     #on which x and y coordinates you give it. (controlxmax, controlymax)
     #or (xmax, ymax)
-    circle = plt.Circle((controlxmax, controlymax), radius=6, fc='r')
+    circle = plt.Circle((1000, 400), radius=6, fc='r')
     fname = f[i].split('.')
     figname = fname[0] +str('.')+ fname[1] + str('.png')
     
@@ -114,7 +119,7 @@ def plot(i):
     #get the fits file number and print out the 3 columns
     numName = fname[1].split('s')
     t = int(numName[2])
-    print(str(t) + ' ' + str(flux) + ' ' + str(controlflux))
+    #print(str(t) + ' ' + str(flux) + ' ' + str(controlflux))
   
     return 1
 

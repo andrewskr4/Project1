@@ -37,7 +37,11 @@ for i in range(len(x)):
 
     #correct flux form our star but adding the difference in flux
     # of the control star
-    combined[i][1] = combined[i][1] + fluxdiff
+    #combined[i][1] = combined[i][1] + fluxdiff
+
+    #scratch that, plot the ratio of the flux from our star
+    #to that of the control star vs time
+    combined[i][1] = combined[i][1]/combined[i][2]
 
 #plot light curve
 plt.plot(combined[:,0],combined[:,1], marker='o', linestyle='None')
