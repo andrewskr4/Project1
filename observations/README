@@ -1,0 +1,15 @@
+The order of scripts to run to go fram just fits files to
+a plotted light curve is:
+
+remove_bias.py     to convert fits files to numpy arrays
+make_plots.py      to make the plots and sort through to remove clouds
+removeClouds.py    makes removeClouds.sh which removes all fits and numpy
+                   files that don't have a corresponding png file
+getlightcurve.py   tracks our star and a control star as they drift across
+                   the images and outouts a 3 column list of file numbers (time)
+		   and fluxex. MUST BE RUN WITH SYNTAX
+		   
+		       python getlightcurve.py -> fluxes.txt
+		       
+plotlightcurve.py  corrects for airmass changes in our star using the flux
+                   changes in the control star and plots the lightcurve
