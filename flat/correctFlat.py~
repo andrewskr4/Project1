@@ -1,0 +1,33 @@
+from astropy.io import fits
+#import imageio
+#from PIL import Image
+from skimage.io import imread
+import matplotlib.pyplot as plt
+import numpy as np
+import glob
+
+f = glob.glob('*.fit')
+bias = np.load("averagebias.npy")
+print(len(f))
+print(bias.shape)
+print(bias.dtype)
+
+
+#print(len(g))
+for i in range(len(f)):
+    
+    hdul = fits.open(f[i])
+    fname = f[i].split('.')
+    figname = fname[0] + fname[1] + str('.png')
+    pyname = fname[0] + fname[1] + str('.npy')
+    #hdul.info()
+
+    data = hdul[0].data
+    data = data - bias
+    #print(data.shape)
+    #print(data.dtype.name)
+    #plt.imshow(data)
+    np.save(pyname, data) 
+    #plt.savefig(figname,bbox_inches='tight', transparent=True,pad_inches=0)
+    hdul.close()
+    print(i)

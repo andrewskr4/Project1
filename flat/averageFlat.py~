@@ -1,0 +1,24 @@
+from astropy.io import fits
+import numpy as np
+import matplotlib.pyplot as plt
+import glob
+
+f = glob.glob('*.fit')
+
+dat= np.empty((15, 1023, 1536))
+
+for i in range(len(f)):
+    hdul = fits.open(f[i])
+    #hdul.info()
+    dat[i] = hdul[0].data
+    hdul.close()
+    print(i)
+
+dat.shape
+flat = np.average(dat, axis=0)
+print(flat)
+plt.imshow(flat)
+figname = 'averageflat.png'
+plt.savefig(figname,bbox_inches='tight', transparent=True,pad_inches=0)
+plt.show()
+    
